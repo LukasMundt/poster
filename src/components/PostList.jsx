@@ -3,12 +3,16 @@ import supabase from "../../utils/supabase";
 export default async function PostList() {
   const { data, error } = await supabase.from("posts").select();
 
+  const { data: user } = await supabase.auth.getUser();
+
+  console.log(user);
+
   if (error) {
     console.error(error);
   }
 
   return (
-    <ul className="list-none space-y-5">
+    <><ul className="list-none space-y-5">
       {data.map((post) => {
         return (
           <li
@@ -20,5 +24,7 @@ export default async function PostList() {
         );
       })}
     </ul>
+    <p>{JSON.stringify(user.session)}</p>
+    </>
   );
 }

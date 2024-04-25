@@ -3,12 +3,12 @@
 import { useState } from "react";
 import supabase from "../../../utils/supabase";
 
-export default function LoginPage() {
+export default function SignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   async function handleSignup() {
-    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    const { data, error } = await supabase.auth.signUp({ email, password });
 
     if (error) {
       console.log(error);
@@ -29,7 +29,7 @@ export default function LoginPage() {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button onClick={handleSignup}>Login</button>
+      <button onClick={handleSignup}>Registrieren</button>
     </div>
   );
 }
